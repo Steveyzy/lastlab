@@ -1,0 +1,55 @@
+ xml<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:models="clr-namespace:Notes.Models"
+                 x:Class="Notes.Views.AboutPage"
+                 Title="About">
+
+    <ContentPage.BindingContext>
+        <models:About />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Spacing="10" Margin="10">
+        <HorizontalStackLayout Spacing="10">
+            <Image Source="dotnet_bot.png"
+                       SemanticProperties.Description="The dot net bot waving hello!"
+                       HeightRequest="64" />
+
+            <Label FontSize="22" FontAttributes="Bold" Text="{Binding Title}" VerticalOptions="End" />
+            <Label FontSize="22" Text="{Binding Version}" VerticalOptions="End" />
+        </HorizontalStackLayout>
+
+        <Label Text="{Binding Message}" />
+        <Button Text="Learn more..." Command="{Binding ShowMoreInfoCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
+
+12. **Update Views/NotePage.xaml:** Open Views/NotePage.xaml and replace the code with this (this adds a Delete button and binds the editor):
+    xml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:models="clr-namespace:Notes.Models"
+                 x:Class="Notes.Views.NotePage"
+                 Title="Note">
+
+    <ContentPage.BindingContext>
+        <models:Note />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <Editor x:Name="TextEditor"
+                    Placeholder="Enter your note"
+                    Text="{Binding Text}"
+                    HeightRequest="100" />
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+            <Button Text="Save"
+                        Clicked="SaveButton_Clicked" />
+
+            <Button Grid.Column="1"
+                        Text="Delete"
+                        Clicked="DeleteButton_Clicked" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
